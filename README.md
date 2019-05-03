@@ -18,10 +18,10 @@ Projects steps:
 5-start constructing the parsing table
               ->Implementation(✔)     Testing (✔)<-
 
-6-Deal with panic mode error recovery in left mmost derivation for certain test I/P 
-              ->Implementation(❌)     Testing (❌)<-
+6-left mmost derivation 
+              ->Implementation(✔)     Testing (✔)<-
 
-7-allow predictive parser (recursive descent parser) 
+7-Deal with panic mode error recovery 
               ->Implementation(❌)     Testing (❌)<-
 
 Bonus:
