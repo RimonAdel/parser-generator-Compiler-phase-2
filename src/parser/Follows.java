@@ -34,9 +34,9 @@ public class Follows extends LL1Grammar{
 				String currentnonTerminalChecking = nonTerminals.get(j);
 				temp = cfg.get(currentnonTerminalChecking);
 				//skip terminal itself RE
-				if(nonTerminal.equals(currentnonTerminalChecking))
-					continue;
-				
+				/*if(nonTerminal.equals(currentnonTerminalChecking))
+					continue;*/
+			
 				//check presence of terminal in RE's
 				for(String ter: temp){
 					int checkFirstToken=0;
@@ -46,6 +46,8 @@ public class Follows extends LL1Grammar{
 						continue;
 					//token found in this RE but at the end so follow are added
 					if(Arrays.asList(arr).indexOf(nonTerminal)==arr.length-1){
+						if(currentnonTerminalChecking.equals(nonTerminal))
+							continue;
 						for(String e:follow.get(currentnonTerminalChecking) ){
 							if(!certainTerminalFollows.contains(e))
 								certainTerminalFollows.add(e);
@@ -54,8 +56,20 @@ public class Follows extends LL1Grammar{
 					}
 					stack = new Stack<String>();
 					stack.push("$");
-					for(int k=arr.length-1;k>=Arrays.asList(arr).indexOf(nonTerminal)+1;k--)
-						stack.push(arr[k]);
+					int indexOfLastPresent = 0;
+					int numOfTimesOfPresence=0;
+					//handle multiple presence of no terminal
+					for(int q=arr.length-1;q>=0;q--)
+						if(arr[q].equals(nonTerminal)){
+							numOfTimesOfPresence++;
+							indexOfLastPresent=q;
+						}
+					if(numOfTimesOfPresence==1)
+						for(int k=arr.length-1;k>=indexOfLastPresent+1;k--)
+							stack.push(arr[k]);
+					else
+						for(int k=arr.length-1;k>=indexOfLastPresent;k--)
+							stack.push(arr[k]);
 					
 					while(!stack.peek().equals("$")){
 						String token = stack.pop();
