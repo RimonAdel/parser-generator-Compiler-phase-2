@@ -51,6 +51,12 @@ public class ParsingTable {
 						if(terminals.contains(rhs[i])){
 							
 							colIndex = terminals.indexOf(s.split(" ")[i]);
+							
+							if(ParsingTable[rowIndex][colIndex] != null){
+								System.out.println("Grammar is not feasible");
+								System.exit(0);
+							}
+								
 							ParsingTable[rowIndex][colIndex] = new Pair<String, String>(key,s);
 							
 							break;
@@ -64,6 +70,12 @@ public class ParsingTable {
 								
 								if(!firstElement.equals("\\L")){
 									colIndex = terminals.indexOf(firstElement);
+									
+									if(ParsingTable[rowIndex][colIndex] != null){
+										System.out.println("Grammar is not feasible");
+										System.exit(0);
+									}
+									
 									ParsingTable[rowIndex][colIndex] = new Pair<String, String>(key,s);
 									
 								}
@@ -77,6 +89,12 @@ public class ParsingTable {
 										for(String followElement:followArr){
 											
 											colIndex = terminals.indexOf(followElement);
+											
+											if(ParsingTable[rowIndex][colIndex] != null){
+												System.out.println("Grammar is not feasible");
+												System.exit(0);
+											}
+											
 											ParsingTable[rowIndex][colIndex] = new Pair<String, String>(key,s);
 										}
 										
@@ -87,9 +105,9 @@ public class ParsingTable {
 									i++;
 																			
 								}
-								break;	
+//								break;	
 							}
-//							break;
+							break;
 						}
 							
 					}	
@@ -102,6 +120,12 @@ public class ParsingTable {
 					for(String followElement:followArr){
 						
 						colIndex = terminals.indexOf(followElement);
+						
+						if(ParsingTable[rowIndex][colIndex] != null){
+							System.out.println("Grammar is not feasible");
+							System.exit(0);
+						}
+						
 						ParsingTable[rowIndex][colIndex] = new Pair<String, String>(key,s);
 						
 					}
@@ -111,6 +135,21 @@ public class ParsingTable {
 		}
 		
 		
+			// add synch entry -> in follow of LHS
+			
+			ArrayList<String> followArr = follow.get(key);
+			for(String followElement:followArr){
+				
+				colIndex = terminals.indexOf(followElement);
+				
+				if(ParsingTable[rowIndex][colIndex] == null)
+					ParsingTable[rowIndex][colIndex] = new Pair<String, String>("Synch","Synch");
+				
+			}
+			
+			
+			
+			
 		}
 		
 		
