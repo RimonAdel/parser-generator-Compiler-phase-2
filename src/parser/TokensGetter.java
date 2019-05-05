@@ -70,7 +70,7 @@ public class TokensGetter {
     public ArrayList<String>  getTokens(){
         ArrayList<String> tokens = new ArrayList<>();
         for (Pair<String,String> pair : inputTokens ){
-            if (pair.getValue().equals("punctuation")||pair.getValue().equals("keyword")){
+            if (pair.getValue().equals("punctuation")||pair.getValue().equals("keyword")||pair.getValue().equals("assign")){
                 tokens.add(pair.getKey());
             }
             else{
