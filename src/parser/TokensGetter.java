@@ -23,7 +23,7 @@ public class TokensGetter {
         //  processBuilder.command("bash", "-c", "./a.out");
 
         // Run a shell script
-        processBuilder.command("./lex.out");
+//        processBuilder.command("./lex.out");
 
         // -- Windows --
 
@@ -32,20 +32,20 @@ public class TokensGetter {
 
         // Run a bat file
         //processBuilder.command("C:\\Users\\mkyong\\hello.bat");
-
-        File oldfile =new File(codeFile);
-        File newfile =new File("TestProgram.txt");
-        if(oldfile.renameTo(newfile)){
-            try {
-
-                Process process = processBuilder.start();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else{
-            System.out.println("Rename failed");
-        }
+//
+//        File oldfile =new File(codeFile);
+//        File newfile =new File("TestProgram.txt");
+//        if(oldfile.renameTo(newfile)){
+//            try {
+//
+//                Process process = processBuilder.start();
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }else{
+//            System.out.println("Rename failed");
+//        }
 
 
         String path = "tmp.txt";
@@ -65,16 +65,23 @@ public class TokensGetter {
         while (!tokenStack.isEmpty()){
             inputTokens.add(new Pair<>(tokenStack.pop(),typeStack.pop()));
         }
-        System.out.println(inputTokens);
     }
 
-    public ArrayList<Pair<String,String>>  getTokens(){
-
-        return inputTokens;
+    public ArrayList<String>  getTokens(){
+        ArrayList<String> tokens = new ArrayList<>();
+        for (Pair<String,String> pair : inputTokens ){
+            if (pair.getValue().equals("punctuation")||pair.getValue().equals("keyword")){
+                tokens.add(pair.getKey());
+            }
+            else{
+                tokens.add(pair.getValue());
+            }
+        }
+        return tokens;
     }
 
     public static void main (String[] Args){
         TokensGetter tokensGetter = new TokensGetter("TestProgram.txt");
-        tokensGetter.getTokens();
+        System.out.println(tokensGetter.getTokens());
     }
 }
