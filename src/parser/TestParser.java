@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TestParser {
-	final static String filePath = "CFG grammer8.txt";
+	final static String filePath = "CFG grammer3.txt";
 	public static void main(String[] args) {		
 		
 		//Step 1: Read CFG and find terminals and non-terminals
@@ -44,18 +44,37 @@ public class TestParser {
 		System.out.println("--------------------------------------------------------------------");
 		
 		//Step 4: check if grammar is LL(1) or not 
-//		if(LL1Grammar.isLL1==false){
-//			System.out.println("\n"+new Exception("This Grammar is not LL1"));
-//			System.exit(0);
-//		}
-//		System.out.println("--------------------------------------------------------------------");
+		if(LL1Grammar.isLL1==false){
+			System.out.println("\n"+new Exception("This Grammar is not LL1"));
+			System.exit(0);
+		}
+		System.out.println("--------------------------------------------------------------------");
 		
 		//Step 5: Construct Parsing table
 		ParsingTable.EvaluateParsingTable(LL1Grammar.cfg, LL1Grammar.terminals,
 										  LL1Grammar.nonTerminals, first, follow);
 		System.out.println("\nParsing Table\n");
+//		ParsingTable.ParsingTable
 		ParsingTable.ShowParsingTable(LL1Grammar.terminals,LL1Grammar.nonTerminals);
 		System.out.println("--------------------------------------------------------------------");
+		
+		//Step 6 : left most Derivation
+		//token for grammar6
+		System.out.println("\nLeft Most Derivation\n");
+		ArrayList<String> tokens = new ArrayList<String>();
+		tokens.add("'float'");
+		tokens.add("'id'");
+		tokens.add("';'");
+		tokens.add("'id'");
+		tokens.add("'='");
+		tokens.add("'num'");
+		tokens.add("';'");
+		tokens.add("'}'");
+		tokens.add("$");	
+		System.out.println(tokens);
+		LMDrivation.LMD(LL1Grammar.terminals,LL1Grammar.nonTerminals,ParsingTable.ParsingTable ,tokens);
+		
+		
 		
 	}
 	

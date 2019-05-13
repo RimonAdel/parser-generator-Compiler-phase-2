@@ -21,7 +21,10 @@ public class ParsingTable {
 											ArrayList<String> nonTerminals,
 											HashMap<String,ArrayList<String>> first,
 											HashMap<String,ArrayList<String>> follow){
-		///should remove '' in each first & follow value
+		//remove '\L' from terminals if exists
+//		if(terminals.contains("'\\L'"))
+//			terminals.remove("'\\L'");
+//		
 		
 		//initialise 2D array
 		ParsingTable = new Pair[nonTerminals.size()][terminals.size()];
@@ -65,8 +68,16 @@ public class ParsingTable {
 							//if a char in RHS is not a terminal
 							
 							firstArr = first.get(rhs[i]);
+//							if(firstArr == null)	break;				
+							System.out.println("fff: "+firstArr);
+							System.out.println("rhs: "+rhs[i]);
+//							System.out.println("size: "+firstArr.size());
+							
 							for(int j=0;j<firstArr.size();j++){
+																
 								String firstElement = firstArr.get(j);
+								if(firstElement == null)
+									System.out.println("null");
 								
 								if(!firstElement.equals("\\L")){
 									colIndex = terminals.indexOf(firstElement);
@@ -106,6 +117,7 @@ public class ParsingTable {
 																			
 								}
 //								break;	
+							
 							}
 							break;
 						}
