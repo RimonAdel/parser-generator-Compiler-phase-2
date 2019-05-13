@@ -22,25 +22,29 @@ Projects steps:
               ->Implementation(✔)     Testing (✔)<-
 
 7-Deal with panic mode error recovery 
-              ->Implementation(❌)     Testing (❌)<-
+              ->Implementation(✔)     Testing (✔)<- 
 
 Bonus:
 
-8-apply left factoring and left recursion on the grammar before parsing step
+1-Apply Left Recursion (✔) and Left Factoring (❌) on the grammar before parsing step
 
+2- Detect if Grammar is not LL(1) (✔)
+
+3- Detect if grammar is Ambigous(Not feasible) (✔)
 
 Notes:
--you will find attached 3 test grammars,
+1-you will find attached 3 test grammars,
 first 2 for easy testing so you can solve it manually to check the output is true in certain step,
 that's for the first and second files,
 the third file is the required grammar in the PDF.
 
-Choose the program you wanna test by just changing the number in the file name found in the static variable in Test class by (1,2,3)
+2-Choose the program you wanna test by just changing the number in the file name found in the static variable in Test class by (1,2,3)
 
-
--All what you need to work on any of the above steps of the project are
+3-All what you need to work on any of the above steps of the project are
 the (terminals and non terminal) arraylists,
 in addition to the cfg
 hashmap which contains all the grammar.
+
+4-In Step 6, you can manually insert the output of Lexical analyser step in 'token' arraylist.
 
 **** VI: we will need the lexical analyzer output to test on, also its noticed in the pdf to make both 2 phases workk togther at the end
